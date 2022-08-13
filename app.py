@@ -5,10 +5,12 @@ from model_page import compare_model_page
 
 
 page = st.sidebar.selectbox("Explore Or Predict Or Else", ("Understanding the Data","Compare Models","Predict"))
+# This is commit
 
 if page == "Understanding the Data":
     show_explore_page()
 elif page == "Compare Models":
     compare_model_page()
 elif page == "Predict":
-    show_predict_page()
+    #show_predict_page()
+    pass

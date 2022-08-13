@@ -22,8 +22,6 @@ def side_menu():
     elif page == "Predict":
         name = list(set(cars["name"].str.split().str.slice(start=0, stop=2).str.join(' ')))
         show_predict_page(name)
-        pass
-
 
 
 if __name__ == '__main__':

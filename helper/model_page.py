@@ -57,5 +57,5 @@ def compare_model_page(cars):
     if ok:
         data = {"lr": lr, "ridge": ridgecv, "lasso": lassocv}
 
-        with open('./pickle/saved_model.pkl', 'wb') as file:
+        with open('./pickle/saved_models.pkl', 'wb') as file:
             pickle.dump(data, file)

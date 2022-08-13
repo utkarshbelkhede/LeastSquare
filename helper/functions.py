@@ -79,6 +79,6 @@ def train_model(X, y, transformer, scaler, model):
 
 # For Loading the Pickle File
 def load_model():
-    with open('./pickle/saved_model.pkl', 'rb') as file:
+    with open('./pickle/saved_models.pkl', 'rb') as file:
         data = pickle.load(file)
     return data

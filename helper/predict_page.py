@@ -5,7 +5,7 @@ from helper.functions import feature_eng, load_model
 def show_predict_page(name):
     st.title("Car Price Prediction")
 
-    st.write("""### We need some information to predict the Price""")
+    st.write("""### We need some information to predict the Price XXX""")
 
     own = (
         "First Owner",

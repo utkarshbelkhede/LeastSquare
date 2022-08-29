@@ -6,8 +6,13 @@ A simple Streamlit WebApp, which can predict Car Price with Machine Learning Mod
 [Demo Link](https://least2.herokuapp.com/)
 
 ## How to use?
+### Clone this repository.
+```bash
+  git clone https://github.com/utkarshbelkhede/LeastSquare.git
+```
 ### Method 1 - Using Docker
 **Prerequisite** - Docker
+
 1. Build Docker Images
 ```bash
   docker images -t docker build -t leastsquare:latest .
@@ -18,23 +23,19 @@ A simple Streamlit WebApp, which can predict Car Price with Machine Learning Mod
 ```
 ### Method 2 - Using Virtual Environment
 **Prerequisite** - Git, Conda, Python
-1. Clone this repository.
-```bash
-  git clone https://github.com/utkarshbelkhede/LeastSquare.git
-```
-2. Create a Conda Virtual Environment
+1. Create a Conda Virtual Environment
 ```bash
   conda create -n leastsquare
 ```
-3. Activate Virtual Environment
+2. Activate Virtual Environment
 ```bash
   conda activate leastsquare
 ```
-4. Install Requirements.txt
+3. Install Requirements.txt
 ```bash
   pip install -r requirements.txt
 ```
-5. Run Streamlit App
+4. Run Streamlit App
 ```bash
   streamlit run app.py
 ```

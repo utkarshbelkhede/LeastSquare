@@ -3,6 +3,8 @@
 
 A simple Streamlit WebApp, which can predict Car Price with Machine Learning Models such as **Linear Regression, Ridge Regression, and Lasso Regression**.
 
+[Demo Link](https://least2.herokuapp.com/)
+
 ## How to use?
 ### Method 1 - Using Docker
 **Prerequisite** - Docker

@@ -15,7 +15,7 @@ A simple Streamlit WebApp, which can predict Car Price with Machine Learning Mod
 
 1. Build Docker Images
 ```bash
-  docker images -t docker build -t leastsquare:latest .
+  docker build -t leastsquare:latest .
 ```
 2. Run App in Docker Container
 ```bash

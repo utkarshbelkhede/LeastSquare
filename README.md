@@ -22,7 +22,7 @@ A simple Streamlit WebApp, which can predict Car Price with Machine Learning Mod
   docker run leastsquare:latest
 ```
 ### Method 2 - Using Virtual Environment
-**Prerequisite** - Git, Conda, Python
+**Prerequisite** - Conda, Python
 1. Create a Conda Virtual Environment
 ```bash
   conda create -n leastsquare

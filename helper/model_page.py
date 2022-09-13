@@ -1,23 +1,34 @@
 from helper.libraries import *
 from helper.functions import *
 
+def prepare_for_modeling(cars):
+    cars['zscore'] = (cars['Price'] - cars['Price'].mean()) / cars['Price'].std()
+    
+    cars = cars[(cars['zscore'] > -3) & (cars['zscore'] < 3)]
+
+    del cars["zscore"]
+
+    return cars
+
 
 def compare_model_page(cars):
     st.write("""
         ### Let's Compare All Models
         """)
 
+    cars = prepare_for_modeling(cars)
+
     # Splitting Data into X and y
-    X = cars.drop(columns=['selling_price'])
-    y = cars['selling_price']
+    X = cars.drop(columns =['Price'])
+    y = cars['Price']
 
-    # One Hot Encoding
     ohe = OneHotEncoder()
-    ohe.fit(X[['name', 'fuel']])
-
+    ohe.fit(X[['Name','Variant','Transmission','Owner_Type','Fuel']])
+    
     column_trans = make_column_transformer(
-        (OneHotEncoder(categories=ohe.categories_), ['name', 'fuel']),
-        remainder='passthrough')
+        (OneHotEncoder(categories=ohe.categories_),['Name','Variant','Transmission','Owner_Type','Fuel']),
+        remainder='passthrough'
+    )  
 
     scaler = StandardScaler(with_mean=False)
 
@@ -46,8 +57,8 @@ def compare_model_page(cars):
     st.dataframe(metrics)
 
     st.write("""
-                #### Lasso Regression
-            """)
+            #### Ridge Regression
+        """)
 
     metrics, lassocv = train_model(X, y, column_trans, scaler, lassocv)
     st.dataframe(metrics)

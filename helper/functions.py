@@ -1,43 +1,45 @@
 from helper.libraries import *
 
+# To Perform Regex Operation
+import re 
+
+# Will return string containing numbers
+def find_number(text):
+    num = re.findall(r'[0-9]+',text)
+    return "".join(num)
 
 # For Feature Engineering
-def feature_eng(cars):
-    # extracts the company and model name from name column
-    cars["name"] = cars["name"].str.split().str.slice(start=0, stop=2).str.join(' ')
+def feature_engineering(cars):
+    # First seven columns are relevant
+    cars = cars.iloc[:,:7]
 
-    # We compute age of car and store it in the age columns
-    cars["age"] = date.today().year - cars.year
+    # Giving Proper names to features
+    cars.rename(columns = {'Title':'Name', 'cvakb':'Variant', 'cvakb1':'Transmission', 'bvr0c':'km_driven', 'bvr0c2':'Owner_Type', 'bvr0c3':'Fuel', '_7udzz':'Price'}, inplace = True)
 
-    # extracting numbers from mileage and converting into float
-    cars["mileage_kmpl"] = cars.mileage.str.extract(r'(^[0-9]*.[0-9]*)').astype("float64")
+    # Extracting only numbers
+    cars["Price"] = cars["Price"].apply(lambda x: find_number(x))
 
-    # extracting numbers from max_power and converting into float
-    cars["max_power_bhp"] = cars.max_power.str.extract(r'(^[0-9]*.[0-9]*)').astype("float64")
+    # Extracting year of purchase from Name
+    cars["Year_Purchased"] = cars["Name"].str.split().str.slice(start=0,stop=1).str.join(' ')
 
-    # extracting numbers from engine and converting into int
-    cars["engine_cc"] = cars.engine.str.extract(r'(^[0-9]*.[0-9]*)').astype(int)
+    # Extracting name excluding year of purchase
+    cars["Name"] = cars["Name"].str.split().str.slice(start=1,stop=3).str.join(' ')
 
-    # We encode the owner categories in the order :
-    # 'Test Drive Car' > 'First Owner' > 'Second Owner' > 'Third Owner' > 'Fourth & Above Owner'
-    cars["owner"] = cars.owner.map(
-        {'Test Drive Car': 5, 'First Owner': 4, 'Second Owner': 3, 'Third Owner': 2, 'Fourth & Above Owner': 1})
+    # Removing "km"
+    cars["km_driven"] = cars["km_driven"].str.split().str.slice(start=0,stop=1).str.join(' ')
 
-    # Encoding Transmission values
-    cars["transmission_manual"] = cars.transmission.map({'Manual': 1, 'Automatic': 0})
+    # Extracting only numbers
+    cars["km_driven"] = cars["km_driven"].apply(lambda x: find_number(x))
 
-    # Encoding Seller Information in the order:
-    # 'Individual' < 'Dealer' < 'Trustmark Dealer'
-    cars["seller_type"] = cars.seller_type.map({'Trustmark Dealer': 3, 'Dealer': 2, 'Individual': 1})
+    # Removing Transmission type from the end of Variant
+    cars["Variant"] = cars["Variant"].str.rsplit(' ',1).str[0]
 
-    # converting column seats into int
-    cars["seats"] = cars.seats.astype(int)
+    # Converting features to int
+    cars = cars.astype({"km_driven":"int","Price":"int", "Year_Purchased":"int"})
 
-    # columns to remove
-    remove_cols = ["year", "mileage", "engine", "torque", "max_power", "transmission"]
-
-    # removing the columns
-    cars.drop(columns=remove_cols, inplace=True)
+    # Deriving Age of Vehical from Year of Purchase
+    cars["Age"] = date.today().year - cars["Year_Purchased"]
+    cars.drop(['Year_Purchased'], axis=1, inplace=True)
 
     return cars
 

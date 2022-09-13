@@ -28,82 +28,101 @@ def show_explore_page(cars):
         """)
 
     fig, ax = plt.subplots()
-    ax = sns.set(rc={'figure.figsize': (10,8)})
+    ax = sns.set(rc={'figure.figsize': (10, 8)})
     plt.title("Countplot Owner Type Vs Number of Cars")
-    sns.countplot(x='owner', data=cars).set_ylabel("No. Of Cars", fontsize=10)
+    sns.countplot(x ='Owner_Type', data = cars)
     st.pyplot(fig)
 
     st.write("""
-        #### Observation
+        **Observation**
+
         **First Owned Cars** are **highest among all**.
     """)
 
     fig, ax = plt.subplots()
     ax = sns.set(rc={'figure.figsize': (10, 8)})
-    plt.title("Owner Vs Selling Price")
-    sns.barplot(x='owner', y='selling_price', data=cars, palette='spring')
+    plt.title("Type of Owner Vs Number of cars")
+    plt.pie(cars['Owner_Type'].value_counts(),labels=cars['Owner_Type'].unique(),pctdistance=1.1, labeldistance=1.2,autopct='%.2f')
     st.pyplot(fig)
 
     st.write("""
-        #### Observation
-        **Test Drive cars** have **high average selling price**. 
+        **Observation**
+
+        1. **79.75 %** of cars are **First Owned**.
+        2. **19.46 %** of cars are **Second Owned**.
+        3. **0.79 %** of cars are **Third Owned**.
+    """)
+
+    fig, ax = plt.subplots()
+    ax = sns.set(rc={'figure.figsize': (10, 8)})
+    plt.title("Owner Type Vs Price")
+    sns.barplot(x='Owner_Type',y='Price',data=cars,palette='spring')
+    st.pyplot(fig)
+
+    st.write("""
+        **Observation**
+
+        **First Owner cars** have **high average selling price**. 
+
         As **number of owners** increases the **selling price** of car **decreases**.
     """)
 
     fig, ax = plt.subplots()
     ax = sns.set(rc={'figure.figsize': (10, 8)})
     plt.title("Transmission Vs Number of Cars")
-    sns.countplot(x='transmission', data=cars).set_ylabel("No. Of Cars", fontsize=10)
+    sns.countplot(x ='Transmission', data = cars)
     st.pyplot(fig)
 
     st.write("""
-        #### Observation
+        **Observation**
+
         Most of the cars are **Manual**.
     """)
 
     fig, ax = plt.subplots()
     ax = sns.set(rc={'figure.figsize': (10, 8)})
     plt.title("Transmission Vs Selling Price")
-    sns.barplot(x='transmission', y='selling_price', data=cars, palette='spring')
+    sns.barplot(x='Transmission',y='Price',data=cars,palette='spring')
     st.pyplot(fig)
 
     st.write("""
-        #### Observation
+        **Observation**
+
         Cars having **Automatic Transmission have high selling price**.
     """)
 
     fig, ax = plt.subplots()
     ax = sns.set(rc={'figure.figsize': (10, 8)})
     plt.title("Fuel Vs Number of Cars")
-    sns.countplot(x='fuel', data=cars).set_ylabel("No. Of Cars", fontsize=10)
+    sns.countplot(x ='Fuel', data = cars)
     st.pyplot(fig)
 
     st.write("""
-        #### Observation
-        Most of the cars are **Diesel**.
+        **Observation**
+
+        Most of the cars are **Petrol**.
+    """)
+
+    fig, ax = plt.subplots()
+    ax = sns.set(rc={'figure.figsize': (10, 8)})
+    plt.title("Fuel Vs Price")
+    sns.barplot(x='Fuel',y='Price',data=cars,palette='spring')
+    st.pyplot(fig)
+
+    st.write("""
+        **Observation**
+
+        **Diesel cars** have **high average selling price**.
     """)
 
     fig, ax = plt.subplots()
     ax = sns.set(rc={'figure.figsize': (10, 8)})
     plt.title("Fuel Vs Selling Price")
-    sns.barplot(x='fuel', y='selling_price', data=cars, palette='spring')
+    sns.barplot(x ='Age', y="Price", data = cars ,palette='spring')
     st.pyplot(fig)
 
     st.write("""
-        #### Observation
-        **Diesel cars** have **high average selling price**.
+        **Observation**
+
+        As the age of Vehical increases, Price Decreases.
     """)
-
-    fig, ax = plt.subplots()
-    ax = sns.set(rc={'figure.figsize': (15, 10)})
-    plt.title("Fuel Vs Selling Price")
-    sns.countplot(x='year', data=cars).set_ylabel("No. Of Cars", fontsize=10)
-    st.pyplot(fig)
-
-    st.write("""
-        #### Observation
-        In the year 2017, Most of the cars were sold.
-    """)
-
-
-

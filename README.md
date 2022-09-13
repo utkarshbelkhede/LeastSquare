@@ -3,7 +3,7 @@
 
 A simple Streamlit WebApp, which can predict Car Price with Machine Learning Models such as **Linear Regression, Ridge Regression, and Lasso Regression**.
 
-[Demo Link](https://least2.herokuapp.com/)
+### [See Demo on Heroku](https://least2.herokuapp.com/)
 
 ## How to use?
 ### Clone this repository.
@@ -42,24 +42,20 @@ A simple Streamlit WebApp, which can predict Car Price with Machine Learning Mod
 
 ## About Dataset
 
+This data was scraped from [cars24.com](https://www.cars24.com/). 
 
-This dataset contains data of Quikr Cars about second hand cars . This data was web scrapped from their website and have data of about 769 cars and have features like
+I used [Octoparse](https://www.octoparse.com/download/windows) to scrape the data from the website.
 
 - Name
-- Year
-- Selling Price
-- Kms driven
-- Fuel
-- Seller Type
+- Variant
 - Transmission
-- Owner Type
-- Mileage
-- Engine Capacity
-- Max Power
-- Torque
-- Seats
+- km_driven
+- Owner_Type
+- Fuel
+- Price
+- Age (Derived from Year Purchased)
 
-[Dataset Link](https://drive.google.com/file/d/1vZydeaBIGP1nKJF3oyBlIntvZ8oPje-Q/view?usp=sharing)
+[Dataset Link](https://drive.google.com/file/d/11Ham5y71ng49ZKY7f1CS3d1BZgILUywV/view?usp=sharing)
 
 ## Project Organization
 ![Tree](images/Tree.png)

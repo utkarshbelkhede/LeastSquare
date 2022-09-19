@@ -5,6 +5,9 @@ A simple Streamlit WebApp, which can predict Car Price with Machine Learning Mod
 
 ### [See Demo on Heroku](https://least2.herokuapp.com/)
 
+
+I've also trained this using **Neural Network**.
+[See it on Colab](https://drive.google.com/file/d/1dTJbutFd8ykwrUlPHMy9j8tWd0sad1Db/view?usp=sharing)
 ## How to use?
 ### Clone this repository.
 ```bash
@@ -74,7 +77,7 @@ I used [Octoparse](https://www.octoparse.com/download/windows) to scrape the dat
 
 ![Predict Page](images/Prediction_page.png)
 
-## 🔗 Links
+### 🔗 Links
 
 https://www.linkedin.com/in/utkarshbelkhede/
 

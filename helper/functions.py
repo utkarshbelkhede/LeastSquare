@@ -50,17 +50,26 @@ def format_float(num):
 
 
 # Returns Dataframe consisting all errors
-def metrics(y_test, y_pred):
+def metrics(y_test, y_pred, X_train):
     mae = mean_absolute_error(y_test, y_pred)
     mse = mean_squared_error(y_test, y_pred)
     rmse = np.sqrt(mse)
     r2 = r2_score(y_test, y_pred)
+    
+    # Number of rows
+    n = len(X_train)
+
+    # Number of Independent Features
+    k = len(X_train.columns)
+
+    adj_r2 = 1- ((1-r2) * (n-1)/(n-k-1))
 
     dict_ = {
         "MAE": [format_float(mae)],
         "MSE": [format_float(mse)],
         "RMSE": [format_float(rmse)],
-        "R2": [(r2)]
+        "R2": [(r2)],
+        "Adjusted-R2": [(adj_r2)]
     }
 
     results = pd.DataFrame(dict_)
@@ -71,12 +80,12 @@ def metrics(y_test, y_pred):
 
 # For Training model
 def train_model(X, y, transformer, scaler, model):
-    X_train, x_test, Y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1)
     pipe = make_pipeline(transformer, scaler, model)
+    X_train, x_test, Y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1)
     pipe.fit(X_train, Y_train)
     y_pred = pipe.predict(x_test)
-
-    return metrics(y_test, y_pred), pipe
+    
+    return metrics(y_test,y_pred, X_train), pipe
 
 
 # For Loading the Pickle File

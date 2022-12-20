@@ -1,5 +1,5 @@
-from helper.libraries import *
-from helper.functions import feature_engineering, load_model
+from utils.libraries import *
+from utils.functions import feature_engineering, load_model
 
 
 def show_predict_page(name, variant):

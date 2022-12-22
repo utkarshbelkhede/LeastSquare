@@ -1,19 +1,19 @@
-# Least Square
+# Least Square <a href="https://leastsquare.onrender.com" target="_parent"><img src="images/play-button-arrowhead.png" style="width:18px" alt="Open On Render"/></a>
 
 A simple Streamlit WebApp, which can predict Car Price with Machine Learning Models such as **Linear Regression, Ridge Regression, and Lasso Regression**.
 
-[See Project Documentation](https://docs.google.com/document/d/1oW7xq0iSP3OqRFctUsz4QZQ90_T0gBaEjTF6NhJ-UrE/edit?usp=sharing)
-### [See Demo on Render](https://leastsquare.onrender.com)
+[Project Documentation](https://docs.google.com/document/d/1oW7xq0iSP3OqRFctUsz4QZQ90_T0gBaEjTF6NhJ-UrE/edit?usp=sharing)
 
 I've also trained this using **Neural Network**.
-[See it on Colab](https://drive.google.com/file/d/16xbO0OcmeYPbBuafw1rjFfnEh6ENVXKW/view?usp=sharing)
 
-## How to use?
-### Clone this repository.
+<a href="https://colab.research.google.com/github/utkarshbelkhede/LeastSquare/blob/master/notebook/Regression_using_ANN_Cars24.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
+## **How to use?**
+### **Clone this repository**
 ```bash
   git clone https://github.com/utkarshbelkhede/LeastSquare.git
 ```
-### Method 1 - Using Docker
+### **Method 1 - Using Docker**
 **Prerequisite** - Docker
 
 1. Build Docker Images
@@ -24,7 +24,7 @@ I've also trained this using **Neural Network**.
 ```bash
   docker run leastsquare:latest
 ```
-### Method 2 - Using Virtual Environment
+### **Method 2 - Using Virtual Environment**
 **Prerequisite** - Conda, Python
 1. Create a Conda Virtual Environment
 ```bash
@@ -43,7 +43,7 @@ I've also trained this using **Neural Network**.
   streamlit run app.py
 ```
 
-## About Dataset
+## **About Dataset**
 
 This data was scraped from [cars24.com](https://www.cars24.com/). 
 
@@ -60,25 +60,22 @@ I used [Octoparse](https://www.octoparse.com/download/windows) to scrape the dat
 
 [Dataset Link](https://drive.google.com/file/d/11Ham5y71ng49ZKY7f1CS3d1BZgILUywV/view?usp=sharing)
 
-## Project Organization
+## **Project Organization**
 ![Tree](images/Tree.png)
 
-## Screenshots
+## **Screenshots**
 
-### Explore Page
+### **Explore Page**
 
 ![Explore Page](images/Explore_page.png)
 
-### Model Page
+### **Model Page**
 
 ![Model Page](images/Models_page.png)
 
-### Predict Page
+### **Predict Page**
 
 ![Predict Page](images/Prediction_page.png)
+ 
 
-### 🔗 Links
-
-https://www.linkedin.com/in/utkarshbelkhede/
-
-https://github.com/utkarshbelkhede
+# <a href="https://www.linkedin.com/in/utkarshbelkhede/" target="_parent"><img src="images/linkedIn.png" style="width:25px" alt="LinkedIn"/></a> <a href="https://github.com/utkarshbelkhede" target="_parent"><img src="images/github.png" style="width:25px" alt="LinkedIn"/></a>

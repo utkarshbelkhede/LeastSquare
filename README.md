@@ -1,4 +1,3 @@
-
 # Least Square
 
 A simple Streamlit WebApp, which can predict Car Price with Machine Learning Models such as **Linear Regression, Ridge Regression, and Lasso Regression**.
@@ -7,7 +6,7 @@ A simple Streamlit WebApp, which can predict Car Price with Machine Learning Mod
 ### [See Demo on Heroku](https://least2.herokuapp.com/)
 
 I've also trained this using **Neural Network**.
-[See it on Colab](https://drive.google.com/file/d/1dTJbutFd8ykwrUlPHMy9j8tWd0sad1Db/view?usp=sharing)
+[See it on Colab](https://drive.google.com/file/d/16xbO0OcmeYPbBuafw1rjFfnEh6ENVXKW/view?usp=sharing)
 
 ## How to use?
 ### Clone this repository.

@@ -2,12 +2,13 @@ from utils.functions import feature_engineering
 from utils.predict_page import show_predict_page
 from utils.explore_page import show_explore_page
 from utils.model_page import compare_model_page
+from utils import config
 from utils.libraries import *
 
 
 def side_menu():
     try:
-        cars = pd.read_csv("./datasets/Cars24.csv")
+        cars = pd.read_csv(config.main_data)
         cars = feature_engineering(cars)
     except NameError:
         print("Some problem with file...")

@@ -75,4 +75,4 @@ def show_predict_page(name, variant):
         elif model == "Lasso Regression":
             price = lasso_loaded.predict(results)
 
-        st.subheader(f"The estimated price of your Car is Rupees {price[0]:,.2f}")
+        st.subheader(f"The estimated price of your Car is Rupees {price[0]:,.0f}")

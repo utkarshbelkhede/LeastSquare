@@ -13,9 +13,7 @@ def prepare_for_modeling(cars):
 
 
 def compare_model_page(cars):
-    st.write("""
-        ### Let's Compare All Models
-        """)
+    st.title("Let's Compare All Models")
 
     cars = prepare_for_modeling(cars)
 
@@ -24,10 +22,10 @@ def compare_model_page(cars):
     y = cars['Price']
 
     ohe = OneHotEncoder()
-    ohe.fit(X[['Name', 'Variant', 'Transmission', 'Owner_Type', 'Fuel']])
+    ohe.fit(X[['Company', 'Car','Variant','Transmission','Owner_Type','Fuel']])
 
     column_trans = make_column_transformer(
-        (OneHotEncoder(categories=ohe.categories_), ['Name', 'Variant', 'Transmission', 'Owner_Type', 'Fuel']),
+        (OneHotEncoder(categories=ohe.categories_),['Company', 'Car','Variant','Transmission','Owner_Type','Fuel']),
         remainder='passthrough'
     )
 

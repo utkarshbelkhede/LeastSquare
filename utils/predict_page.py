@@ -2,15 +2,10 @@ from utils.libraries import *
 from utils.functions import feature_engineering, load_model
 
 
-def show_predict_page(name, variant):
-    st.title("Car Price Prediction")
+def show_predict_page(data):
+    st.title("Predict the Price of Your Car")
 
-    st.write("""### We need some information to predict the Price""")
-    
-    trans = (
-        "Manual",
-        "Automatic"
-    )
+    st.write("""### We need some information""")
 
     own = (
         "1st Owner",
@@ -30,29 +25,37 @@ def show_predict_page(name, variant):
         "Lasso Regression"
     )
 
-    Name = st.selectbox("Car Model", name)
+    company_list = data["Company"].unique().tolist()
+    Company = st.selectbox("**Car Company Name**", company_list)
 
-    Variant = st.selectbox("Car Variant", variant)
+    car_list = data[data["Company"] == Company]["Car"].unique().tolist()
+    Car = st.selectbox("**Which Car?**", car_list)
 
-    Transmission = st.radio("Transmission Type", trans)
+    variant_list = data[(data["Company"] == Company) & (data["Car"] == Car)]["Variant"].unique().tolist()
+    Variant = st.selectbox("**Variant**", variant_list)
 
-    km_driven = st.number_input('Kilometer Driven', 1000, 10000000)
+    fuel_list = data[(data["Company"] == Company) & (data["Car"] == Car) & (data["Variant"] == Variant)]["Fuel"].unique().tolist()
+    Fuel = st.selectbox("**Fuel Type**", fuel_list)
 
-    Owner_Type = st.selectbox("Owner Type", own)
+    transmission_list = data[(data["Company"] == Company) & (data["Car"] == Car) & (data["Variant"] == Variant)]["Transmission"].unique().tolist()
+    Transmission = st.radio("**Transmission Type**", transmission_list)
 
-    Fuel = st.selectbox("Fuel Type", fu)
+    km_driven = st.number_input('**Kilometer Driven**', 1000, 10000000)
+
+    Owner_Type = st.selectbox("**Owner Type**", own)
     
-    Year = st.number_input('Purchased In', 2000, 2030)
+    Year = st.number_input('**Purchased In**', 2020, 2030)
     Age = date.today().year - Year
 
-    model = st.selectbox("Select Model", mo)
+    model = st.selectbox("**Select Model**", mo)
 
     ok = st.button("Calculate Price")
 
     if ok:
 
         dict_ = {
-            "Name": [Name],
+            "Company": [Company],
+            "Car": [Car],
             "Variant": [Variant],
             "Transmission": [Transmission],
             "km_driven":[km_driven],
@@ -75,4 +78,4 @@ def show_predict_page(name, variant):
         elif model == "Lasso Regression":
             price = lasso_loaded.predict(results)
 
-        st.subheader(f"The estimated price of your Car is Rupees {price[0]:,.0f}")
+        st.subheader(f"The estimated price of your Car is &#8377; {price[0]:,.0f}")

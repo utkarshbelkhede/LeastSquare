@@ -14,7 +14,6 @@ def find_number(text):
     num = re.findall(r'[0-9]+',text)
     return "".join(num)
 
-
 def feature_engineering(cars):
     """
     Does Feature Engineering.
@@ -35,10 +34,12 @@ def feature_engineering(cars):
     cars["Price"] = cars["Price"].apply(lambda x: find_number(x))
 
     # Extracting year of purchase from Name
-    cars["Year_Purchased"] = cars["Name"].str.split().str.slice(start=0,stop=1).str.join(' ')
+    cars['Year_Purchased'] = [' '.join(x.split(' ')[0:1]) for x in cars['Name']]
 
     # Extracting name excluding year of purchase
-    cars["Name"] = cars["Name"].str.split().str.slice(start=1,stop=3).str.join(' ')
+    cars['Company'] = [' '.join(x.split(' ')[1:2]) for x in cars['Name']]
+
+    cars['Car'] = [' '.join(x.split(' ')[2:]) for x in cars['Name']]
 
     # Removing "km"
     cars["km_driven"] = cars["km_driven"].str.split().str.slice(start=0,stop=1).str.join(' ')
@@ -47,14 +48,14 @@ def feature_engineering(cars):
     cars["km_driven"] = cars["km_driven"].apply(lambda x: find_number(x))
 
     # Removing Transmission type from the end of Variant
-    cars["Variant"] = cars["Variant"].str.rsplit(' ',1).str[0]
+    cars['Variant'] = [' '.join(x.split(' ')[:-1]) for x in cars['Variant']]
 
     # Converting features to int
     cars = cars.astype({"km_driven":"int","Price":"int", "Year_Purchased":"int"})
 
     # Deriving Age of Vehical from Year of Purchase
     cars["Age"] = date.today().year - cars["Year_Purchased"]
-    cars.drop(['Year_Purchased'], axis=1, inplace=True)
+    cars.drop(['Year_Purchased', 'Name'], axis=1, inplace=True)
 
     return cars
 
@@ -132,6 +133,6 @@ def train_model(X, y, transformer, scaler, model):
 
 # For Loading the Pickle File
 def load_model():
-    with open('./pickle/saved_models.pkl', 'rb') as file:
+    with open('./pickle/LinearRegressionModel.pkl', 'rb') as file:
         data = pickle.load(file)
     return data

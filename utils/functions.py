@@ -107,7 +107,7 @@ def metrics(y_test, y_pred, X_train):
 
 
 # For Training model
-def train_model(X, y, transformer, scaler, model):
+def train_model(data, target, pipe):
     """
     Does,
     1. OneHotEncoding
@@ -125,12 +125,24 @@ def train_model(X, y, transformer, scaler, model):
     model: ML Model
     """
 
-    pipe = make_pipeline(transformer, scaler, model)
+    X = data.drop(columns =[target])
+    y = data[target]
+
     X_train, x_test, Y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1)
     pipe.fit(X_train, Y_train)
     y_pred = pipe.predict(x_test)
     
-    return metrics(y_test,y_pred, X_train), pipe
+    return metrics(y_test, y_pred, X_train), pipe
+
+
+def prepare_for_modeling(data):
+    data['zscore'] = (data['Price'] - data['Price'].mean()) / data['Price'].std()
+
+    data = data[(data['zscore'] > -3) & (data['zscore'] < 3)]
+
+    del data["zscore"]
+
+    return data
 
 
 # For Loading the Pickle File

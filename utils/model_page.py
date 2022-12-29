@@ -1,28 +1,14 @@
 from utils.libraries import *
 from utils.functions import *
+from utils import config
 
-
-def prepare_for_modeling(cars):
-    cars['zscore'] = (cars['Price'] - cars['Price'].mean()) / cars['Price'].std()
-
-    cars = cars[(cars['zscore'] > -3) & (cars['zscore'] < 3)]
-
-    del cars["zscore"]
-
-    return cars
-
-
-def compare_model_page(cars):
+def compare_model_page(data):
     st.title("Let's Compare All Models")
 
-    cars = prepare_for_modeling(cars)
-
-    # Splitting Data into X and y
-    X = cars.drop(columns=['Price'])
-    y = cars['Price']
+    data = prepare_for_modeling(data)
 
     ohe = OneHotEncoder()
-    ohe.fit(X[['Company', 'Car','Variant','Transmission','Owner_Type','Fuel']])
+    ohe.fit(data[['Company', 'Car','Variant','Transmission','Owner_Type','Fuel']])
 
     column_trans = make_column_transformer(
         (OneHotEncoder(categories=ohe.categories_),['Company', 'Car','Variant','Transmission','Owner_Type','Fuel']),
@@ -38,7 +24,8 @@ def compare_model_page(cars):
         #### Linear Regression
     """)
 
-    metrics_df, lr = train_model(X, y, column_trans, scaler, lr)
+    pipe = make_pipeline(column_trans, scaler, lr)
+    metrics_df, lr = train_model(data, 'Price', pipe)
     st.dataframe(metrics_df)
 
     st.write("""
@@ -51,8 +38,9 @@ def compare_model_page(cars):
     alpha_r = st.selectbox("Select Alpha for Ridge", alphas)
 
     ridge = Ridge(alpha=int(alpha_r))
+    pipe = make_pipeline(column_trans, scaler, ridge)
+    metrics_df, lasso = train_model(data, 'Price', pipe)
 
-    metrics_df, ridge = train_model(X, y, column_trans, scaler, ridge)
     st.dataframe(metrics_df)
 
     st.write("""
@@ -62,8 +50,8 @@ def compare_model_page(cars):
     alpha_l = st.selectbox("Select Alpha for Lasso", alphas)
 
     lasso = Lasso(alpha=alpha_l)
-
-    metrics_df, lasso = train_model(X, y, column_trans, scaler, lasso)
+    pipe = make_pipeline(column_trans, scaler, lasso)
+    metrics_df, lasso = train_model(data, 'Price', pipe)
     st.dataframe(metrics_df)
 
     ok = st.button("Save Regression Model")
@@ -71,5 +59,5 @@ def compare_model_page(cars):
     if ok:
         data = {"lr": lr, "ridge": ridge, "lasso": lasso}
 
-        with open('./pickle/saved_models.pkl', 'wb') as file:
+        with open(config.model_pickle, 'wb') as file:
             pickle.dump(data, file)

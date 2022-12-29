@@ -1,4 +1,5 @@
 from utils.libraries import *
+from utils import config
 
 
 def find_number(text):
@@ -13,6 +14,7 @@ def find_number(text):
 
     num = re.findall(r'[0-9]+',text)
     return "".join(num)
+
 
 def feature_engineering(cars):
     """
@@ -133,6 +135,6 @@ def train_model(X, y, transformer, scaler, model):
 
 # For Loading the Pickle File
 def load_model():
-    with open('./pickle/LinearRegressionModel.pkl', 'rb') as file:
+    with open(config.model_pickle, 'rb') as file:
         data = pickle.load(file)
     return data

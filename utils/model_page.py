@@ -5,7 +5,8 @@ from utils import config
 def compare_model_page(data):
     st.title("Let's Compare All Models")
 
-    data = prepare_for_modeling(data)
+    outliers = st.selectbox("**Remove outliers by?**", ["IQR", "Z-Score"])
+    data = prepare_for_modeling(data, outliers)
 
     ohe = OneHotEncoder()
     ohe.fit(data[['Company', 'Car','Variant','Transmission','Owner_Type','Fuel']])

@@ -135,12 +135,19 @@ def train_model(data, target, pipe):
     return metrics(y_test, y_pred, X_train), pipe
 
 
-def prepare_for_modeling(data):
-    data['zscore'] = (data['Price'] - data['Price'].mean()) / data['Price'].std()
+def prepare_for_modeling(data, outliers):
+    
+    if outliers == 'Z-Score':
+        data['zscore'] = (data['Price'] - data['Price'].mean()) / data['Price'].std()
+        data = data[(data['zscore'] > -3) & (data['zscore'] < 3)]
+        del data["zscore"]
 
-    data = data[(data['zscore'] > -3) & (data['zscore'] < 3)]
-
-    del data["zscore"]
+    elif outliers == 'IQR':
+        Q1, Q3 = np.percentile(data['Price'], [25, 75])
+        IQR = Q3-Q1
+        lower_fence = Q1 - (1.5*IQR)
+        higher_fence = Q3 + (1.5*IQR)
+        data = data[(data['Price'] > lower_fence) & (data['Price'] < higher_fence)]
 
     return data
 

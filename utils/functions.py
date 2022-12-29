@@ -118,11 +118,9 @@ def train_model(data, target, pipe):
 
     Parameters :
     -----------
-    X: pandas.Series - Independent Features.
-    y: pandas.Series - Dependent Features.
-    transformer: Column Transformer.
-    scaler: Scaler.
-    model: ML Model
+    data: pandas.Dataframe - Independent Features.
+    target: string - Target column name.
+    pipe
     """
 
     X = data.drop(columns =[target])

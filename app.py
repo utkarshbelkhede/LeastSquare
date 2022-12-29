@@ -8,22 +8,20 @@ from utils import config
 
 def side_menu():
     try:
-        cars = pd.read_csv(config.main_data)
-        cars = feature_engineering(cars)
+        data = pd.read_csv(config.main_data)
+        data = feature_engineering(data)
     except NameError:
         print("Some problem with file...")
 
     page = st.sidebar.selectbox("Explore Or Predict Or Else", ("Understanding the Data", "Compare Models", "Predict"))
 
     if page == "Understanding the Data":
-        show_explore_page(cars)
+        show_explore_page(data)
     elif page == "Compare Models":
-        cars.dropna(inplace=True)
-        compare_model_page(cars)
-    elif page == "Predict":
-        #name = list(set(cars["Name"]))
-        #variant = list(set(cars["Variant"]))        
-        show_predict_page(cars)
+        data.dropna(inplace=True)
+        compare_model_page(data)
+    elif page == "Predict":      
+        show_predict_page(data)
 
 
 if __name__ == '__main__':

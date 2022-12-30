@@ -8,18 +8,6 @@ def show_predict_page(data):
 
     st.write("""### We need some information""")
 
-    own = (
-        "1st Owner",
-        "2nd Owner",
-        "3rd Owner"
-    )
-
-    mo = (
-        "Linear Regression",
-        "Ridge Regression",
-        "Lasso Regression"
-    )
-
     company_list = data["Company"].unique().tolist()
     Company = st.selectbox("**Car Company Name**", company_list)
 
@@ -37,12 +25,19 @@ def show_predict_page(data):
 
     km_driven = st.number_input('**Kilometer Driven**', 1000, 10000000)
 
-    Owner_Type = st.selectbox("**Owner Type**", own)
+    owner_list = data["Owner_Type"].unique().tolist()
+    Owner_Type = st.selectbox("**Owner Type**", owner_list)
     
     Year = st.number_input('**Purchased In**', 2000, date.today().year)
     Age = date.today().year - Year
 
-    model = st.selectbox("**Select Model**", mo)
+    model_list = [
+        "Linear Regression",
+        "Ridge Regression",
+        "Lasso Regression"
+    ]
+
+    model = st.selectbox("**Select Model**", model_list)
 
     ok = st.button("Calculate Price")
 

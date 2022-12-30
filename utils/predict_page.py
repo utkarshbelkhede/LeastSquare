@@ -44,7 +44,7 @@ def show_predict_page(data):
 
     Owner_Type = st.selectbox("**Owner Type**", own)
     
-    Year = st.number_input('**Purchased In**', 2020, 2030)
+    Year = st.number_input('**Purchased In**', 2000, date.today().year)
     Age = date.today().year - Year
 
     model = st.selectbox("**Select Model**", mo)

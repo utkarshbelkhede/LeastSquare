@@ -1,5 +1,6 @@
 from utils.libraries import *
-from utils.functions import feature_engineering, load_model
+from utils.functions import load_model
+from utils import config
 
 
 def show_predict_page(data):
@@ -11,12 +12,6 @@ def show_predict_page(data):
         "1st Owner",
         "2nd Owner",
         "3rd Owner"
-    )
-
-    fu = (
-        "Diesel",
-        "Petrol",
-        "Petrol + CNG"
     )
 
     mo = (
@@ -66,7 +61,7 @@ def show_predict_page(data):
 
         results = pd.DataFrame(dict_)
 
-        data = load_model()
+        data = load_model(config.model_pickle)
         lr_loaded = data["lr"]
         ridge_loaded = data["ridge"]
         lasso_loaded = data["lasso"]

@@ -151,7 +151,7 @@ def prepare_for_modeling(data, outliers):
 
 
 # For Loading the Pickle File
-def load_model():
-    with open(config.model_pickle, 'rb') as file:
+def load_model(PATH):
+    with open(PATH, 'rb') as file:
         data = pickle.load(file)
     return data
